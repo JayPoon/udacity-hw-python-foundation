@@ -23,9 +23,10 @@ September 2016.".
 如果键不存在于字典内，将此键加入字典，并将它的值设为给定值。
 """
 
-long_call_dict={}
+long_call_dict = {}
 
-def calc(dicts, key , newval):
+
+def calc(dicts, key, newval):
     val = dicts.get(key)
     if val is not None:
         dicts[key] = val + int(newval)
@@ -34,9 +35,10 @@ def calc(dicts, key , newval):
 
 
 for call in calls:
-    calc(long_call_dict,call[0],call[3])
-    calc(long_call_dict,call[1],call[3])
+    calc(long_call_dict, call[0], call[3])
+    calc(long_call_dict, call[1], call[3])
 
 long_call_tuple = sorted(long_call_dict.items(), key=lambda x: x[1])[-1]
 
-print("{} spent the longest time, {} seconds, on the phone duringSeptember 2016.".format(*long_call_tuple))
+print("{} spent the longest time, {} seconds, on the phone during September 2016.".format(
+    *long_call_tuple))

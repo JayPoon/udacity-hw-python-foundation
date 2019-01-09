@@ -26,3 +26,18 @@ with open('calls.csv', 'r') as f:
 电话号码不能重复，每行打印一条，按字典顺序排序后输出。
 """
 
+number_set = set()
+telemarketers = set()
+
+for text in texts:
+    number_set.add(text[0])
+    number_set.add(text[1])
+for call in calls:
+    number_set.add(call[1])
+
+for call in calls:
+    if call[0] not in number_set:
+        telemarketers.add(call[0])
+
+print("These numbers could be telemarketers:")
+print("\n".join(sorted(telemarketers)))

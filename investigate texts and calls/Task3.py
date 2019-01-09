@@ -30,8 +30,6 @@ with open('calls.csv', 'r') as f:
  <list of codes>
 代号不能重复，每行打印一条，按字典顺序排序后输出。
 
-print()
-
 第二部分: 由班加罗尔固话打往班加罗尔的电话所占比例是多少？
 换句话说，所有由（080）开头的号码拨出的通话中，
 打往由（080）开头的号码所占的比例是多少？
@@ -41,3 +39,31 @@ print()
 to other fixed lines in Bangalore."
 注意：百分比应包含2位小数。
 """
+
+
+def isBangalore(number):
+    return number.startswith("(080)")
+
+
+numbers_from_bangalore = [x[1] for x in calls if isBangalore(x[0])]
+numbers_fromto_bangalore = [(x[0], x[1])
+                            for x in calls if isBangalore(x[0]) and isBangalore(x[1])]
+numberset_from_bangalore = set(numbers_from_bangalore)
+
+# print(numberset_from_bangalore)
+# print(len(numberset_from_bangalore))
+numbers_result = set()
+
+for number in numberset_from_bangalore:
+    if number.startswith("("):
+        numbers_result.add(number[1:3])
+    if " " in number:
+        numbers_result.add(number.split(" ")[0])
+# print(numbers_result)
+sorted_codes = sorted(numbers_result)
+# print(sorted_codes)
+print("The numbers called by people in Bangalore have codes:")
+print("\n".join(sorted_codes))
+
+percent = len(numbers_fromto_bangalore)/len(numbers_from_bangalore)
+print("{:.2f}% percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(percent))

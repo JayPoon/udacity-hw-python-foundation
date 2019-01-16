@@ -3,6 +3,7 @@
 你将在以后的课程中了解更多有关读取文件的知识。
 """
 import csv
+import re
 
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -54,16 +55,21 @@ numberset_from_bangalore = set(numbers_from_bangalore)
 # print(len(numberset_from_bangalore))
 numbers_result = set()
 
+
 for number in numberset_from_bangalore:
-    if number.startswith("("):
-        numbers_result.add(number[1:3])
-    if " " in number:
-        numbers_result.add(number.split(" ")[0])
+
+    m1 = re.match("\((0\d+)\)\d+", number)
+    if m1:
+        numbers_result.add(m1.group(1))
+
+    m2 = re.match("([7-9]\d{3})\d*\s\d+", number)
+
+    if m2:
+        numbers_result.add(m2.group(1))
+
 # print(numbers_result)
-sorted_codes = sorted(numbers_result)
-# print(sorted_codes)
 print("The numbers called by people in Bangalore have codes:")
-print("\n".join(sorted_codes))
+print("\n".join(sorted(numbers_result)))
 
 percent = len(numbers_fromto_bangalore)/len(numbers_from_bangalore)
 print("{:.2f}% percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(percent))

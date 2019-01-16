@@ -71,5 +71,5 @@ for number in numberset_from_bangalore:
 print("The numbers called by people in Bangalore have codes:")
 print("\n".join(sorted(numbers_result)))
 
-percent = len(numbers_fromto_bangalore)/len(numbers_from_bangalore)
+percent = len(numbers_fromto_bangalore)/len(numbers_from_bangalore) * 100
 print("{:.2f}% percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.".format(percent))
